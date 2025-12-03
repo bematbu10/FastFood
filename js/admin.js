@@ -364,7 +364,7 @@ function setDefaultValue() {
     document.getElementById("ten-mon").value = "";
     document.getElementById("gia-moi").value = "";
     document.getElementById("mo-ta").value = "";
-    document.getElementById("chon-mon").value = "Món chay";
+    document.getElementById("chon-mon").value = "Gà rán";
 }
 
 // Open Popup Modal

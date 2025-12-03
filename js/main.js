@@ -47,11 +47,10 @@ window.onload = async () => {
     await loadAccountsFromDB();
     await loadOrdersFromDB();
     await loadOrderDetailsFromDB();
-    // Kiểm tra đăng nhập
     kiemtradangnhap();
     checkAdmin();
 
-    // Chỉ update giỏ hàng nếu có currentuser
+
     if (localStorage.getItem("currentuser")) {
         updateAmount();
         updateCartTotal();
@@ -1083,6 +1082,12 @@ function showHomeProduct(products) {
 }
 
 
+function scrollToBottom() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}
 
 
 function setupPagination(productAll, perPage) {

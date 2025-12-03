@@ -19,7 +19,7 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
-// lưu vào db
+
 app.post("/api/create-order", async (req, res) => {
     const {
         user_id,
@@ -90,7 +90,6 @@ app.post("/api/create-order", async (req, res) => {
     }
 });
 
-// lấy đơn hàng từ db
 app.get("/api/orders", async (req, res) => {
     try {
         const [rows] = await db.execute("SELECT * FROM don_hang ORDER BY id DESC");
@@ -100,7 +99,6 @@ app.get("/api/orders", async (req, res) => {
     }
 });
 
-// lấy chi tiết đơn hàng từ db
 app.get("/api/order-detail/:id", async (req, res) => {
     try {
         const id = req.params.id;
@@ -129,7 +127,6 @@ app.put("/api/orders/:id/status", async (req, res) => {
     }
 });
 
-
 app.get("/api/order-detail", async (req, res) => {
     try {
         const [rows] = await db.execute("SELECT * FROM chi_tiet_don_hang");
@@ -139,8 +136,6 @@ app.get("/api/order-detail", async (req, res) => {
     }
 });
 
-
-
 app.get("/api/products", async (req, res) => {
     try {
         const [rows] = await db.query("SELECT * FROM san_pham ORDER BY id DESC");
@@ -149,6 +144,7 @@ app.get("/api/products", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
 
 app.get("/api/products/:id", async (req, res) => {
     try {
@@ -231,7 +227,6 @@ app.get("/api/test-db", async (req, res) => {
     }
 });
 
-//  API LẤY DANH SÁCH TÀI KHOẢN
 app.get("/api/accounts", async (req, res) => {
     try {
         const [rows] = await db.query("SELECT * FROM tai_khoan");
@@ -241,7 +236,6 @@ app.get("/api/accounts", async (req, res) => {
     }
 });
 
-//  API ĐĂNG NHẬP
 app.post("/api/login", async (req, res) => {
     try {
         const { phone, password } = req.body;
@@ -260,7 +254,6 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
-//  API ĐĂNG KÝ TÀI KHOẢN
 app.post("/api/accounts", async (req, res) => {
     try {
         const { fullname, phone, password, email, address, status, role } = req.body;
@@ -283,8 +276,6 @@ app.post("/api/accounts", async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-
 
 app.use("/products", express.static(path.join(__dirname, "assets/img/products")));
 

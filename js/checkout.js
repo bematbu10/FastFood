@@ -170,10 +170,15 @@ let nutthanhtoan = document.querySelector('.thanh-toan')
 let checkoutpage = document.querySelector('.checkout-page');
 nutthanhtoan.addEventListener('click', () => {
     checkoutpage.classList.add('active');
+
     thanhtoanpage(1);
+
+    loadReceiverInfo();
+
     closeCart();
     body.style.overflow = "hidden"
 })
+
 
 // Đặt hàng ngay
 function dathangngay() {
@@ -191,6 +196,7 @@ function dathangngay() {
             a.note = ghichu;
             checkoutpage.classList.add('active');
             thanhtoanpage(2, a);
+            loadReceiverInfo();  
             closeCart();
             body.style.overflow = "hidden"
         } else {
@@ -318,6 +324,15 @@ async function xulyDathang(product) {
         console.error("❌ Lỗi tạo đơn:", err);
         toast({ title: "Error", message: "Không thể kết nối server!", type: "error" });
     }
+}
+
+function loadReceiverInfo() {
+    let user = JSON.parse(localStorage.getItem("currentuser"));
+    if (!user) return;
+
+    document.getElementById("tennguoinhan").value = user.fullname || "";
+    document.getElementById("sdtnhan").value = user.phone || "";
+    document.getElementById("diachinhan").value = user.address || "";
 }
 
 
